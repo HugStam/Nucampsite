@@ -5,10 +5,10 @@ import { selectAllCampsites } from './campsitesSlice';
 
 const CampsitesList = () => {
     const campsites = selectAllCampsites();
-    
+
     return (
         <Row className='ms-auto'>
-            {CAMPSITES.map((campsite) => {
+            {campsites.map((campsite) => {
                 return (
                     <Col
                         md='5'
