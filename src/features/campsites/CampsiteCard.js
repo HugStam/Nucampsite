@@ -2,7 +2,7 @@ import {Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
 
 const CampsiteCard = (props) => {
     return (
-        <card>
+        <Card>
             <CardImg
                 width='100%'
                 src={props.campsite.image}
@@ -11,7 +11,7 @@ const CampsiteCard = (props) => {
             <CardImgOverlay>
             <CardTitle>{props.campsite.name}</CardTitle>
             </CardImgOverlay>
-        </card>
+        </Card>
     )
 };
 
