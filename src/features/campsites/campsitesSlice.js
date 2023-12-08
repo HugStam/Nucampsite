@@ -1,5 +1,17 @@
+import { createSlice } from '@reduxjs/toolkit';
 import { CAMPSITES} from '../../app/shared/CAMPSITES';
 
+const initialState = {
+    campsitesArray: CAMPSITES
+};
+
+
+const campsitesSlice = createSlice({
+    name: 'campsite',
+    initialState
+});
+
+export const campsiteReducer = campsitesSlice.reducer;
 
 export const selectAllCampsites = ()=> {
     return CAMPSITES;
