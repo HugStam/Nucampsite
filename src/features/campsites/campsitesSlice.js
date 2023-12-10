@@ -11,7 +11,7 @@ const campsitesSlice = createSlice({
     initialState
 });
 
-export const campsiteReducer = campsitesSlice.reducer;
+export const campsitesReducer = campsitesSlice.reducer;
 
 export const selectAllCampsites = (state)=> {
     return state.campsites.campsitesArray;
