@@ -11,7 +11,7 @@ const DisplayList = () => {
         selectFeaturedCampsite(state), 
         selectFeaturedPromotion(state), 
         selectFeaturedPartner(state)
-    ]);
+        ]);
     console.log('dispaly items', items)
 
     return (

@@ -1,3 +1,5 @@
+import Error from '../components/Error';
+import Loading from '../components/Loading';
 import { useSelector } from 'react-redux';
 import { Container, Row } from 'reactstrap';
 import { useParams } from 'react-router-dom';
@@ -11,15 +13,30 @@ const CampsiteDetailPage = () => {
     const campsite = useSelector(selectCampsiteById(campsiteId));
     console.log('campsite:', campsite);
 
-    return (
-        <Container>
-            <SubHeader current={campsite.name} detail={true} />
-            <Row>
+    const isLoading = useSelector((state) => state.campsites.isLoading);
+    const errMsg = useSelector((state) => state.campsites.errMsg);
+    let content = null;
+
+    if (isLoading) {
+        content = <Loading />;
+    } else if (errMsg) {
+        content = <Error errMsg={errMsg} />;
+    } else {
+        content = (
+            <>
                 <CampsiteDetail campsite={campsite} />
                 <CommentsList campsiteId={campsiteId} />
-            </Row>
+            </>
+        );
+    }
+
+
+    return (
+        <Container>
+            {campsite && <SubHeader current={campsite.name} detail={true} />}
+            <Row>{content}</Row>
         </Container>
-    )
+    );
 
 };
 
