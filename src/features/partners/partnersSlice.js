@@ -3,13 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../app/shared/baseUrl';
 import { mapImageURL } from '../../utils/mapImageURL';
 
-
-const initialState = {
-    partnersArray: [],
-    isLoading: true,
-    errMsg: ''
-};
-
 export const fetchPartners = createAsyncThunk(
     'partners/fetchPartners',
     async () => {
@@ -21,6 +14,13 @@ export const fetchPartners = createAsyncThunk(
         return data;
     }
 );
+
+const initialState = {
+    partnersArray: [],
+    isLoading: true,
+    errMsg: ''
+};
+
 
 const partnersSlice = createSlice({
     name: 'partners',
@@ -51,5 +51,11 @@ export const selectAllPartners = (state) => {
 };
 
 export const selectFeaturedPartner = (state) => {
-    return state.partners.partnersArray.find((partner) => partner.featured);
+    return {
+       featuredItem: state.partners.partnersArray.find(
+            (partner) => partner.featured
+        ),
+        isLoading: state.partners.isLoading,
+        errMsg: state.partners.errMsg
+    };
 };

@@ -15,29 +15,30 @@ import { fetchPromotions } from './features/promotions/promotionsSlice';
 
 
 function App() {
-  const dispatch = useDispatch();
-    useEffect(() =>{
-      dispatch(fetchCampsites());
-      dispatch(fetchPartners());
-      dispatch(fetchPromotions());
-  }, [dispatch]);
+    const dispatch = useDispatch();
 
-  return (
-    <div className="App">
-          <Header/>    
-          <Routes>
-              <Route path='/' element={<HomePage />} />
-              <Route path='contact' element={<ContactPage />}/>
-              <Route path='directory' element={<CampsitesDirectoryPage />}/>
-              <Route path='about' element={<AboutPage />}/>
-              <Route
-                    path='directory/:campsiteId'
-                    element={<CampsiteDetailPage />}
-                />
-          </Routes>
-          <Footer/>
-    </div>
-  );
+    useEffect(() => {
+        dispatch(fetchCampsites());
+        dispatch(fetchPartners());
+        dispatch(fetchPromotions());
+    }, [dispatch]);
+
+    return (
+        <div className="App">
+            <Header/>    
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='contact' element={<ContactPage />}/>
+                <Route path='directory' element={<CampsitesDirectoryPage />}/>
+                <Route path='about' element={<AboutPage />}/>
+                <Route
+                      path='directory/:campsiteId'
+                      element={<CampsiteDetailPage />}
+                  />
+            </Routes>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;

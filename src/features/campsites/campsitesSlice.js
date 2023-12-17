@@ -3,13 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../app/shared/baseUrl';
 import { mapImageURL } from '../../utils/mapImageURL';
 
-
-const initialState = {
-    campsitesArray: [],
-    isLoading: true,
-    errMsg: ''
-};
-
 export const fetchCampsites = createAsyncThunk(
     'campsites/fetchCampsites',
     async () => {
@@ -22,8 +15,15 @@ export const fetchCampsites = createAsyncThunk(
     }
 );
 
+const initialState = {
+    campsitesArray: [],
+    isLoading: true,
+    errMsg: ''
+};
+
+
 const campsitesSlice = createSlice({
-    name: 'campsite',
+    name: 'campsites',
     initialState,
     reducers: {},
     extraReducers: {
@@ -31,15 +31,15 @@ const campsitesSlice = createSlice({
             state.isLoading = true;
         },
         [fetchCampsites.fulfilled]: (state, action)=> {
-            state.isLoading = true;
+            state.isLoading = false;
             state.errMsg = '';
             state.campsitesArray = mapImageURL(action.payload);
         },
         [fetchCampsites.rejected]: (state, action)=> {
             state.isLoading = false;
             state.errMsg = action.error ? action.error.message : 'Fetch failed';
-        }
-    }
+        },
+    },
     
 });
 
@@ -60,5 +60,12 @@ export const selectCampsiteById = (id) => (state)=> {
 };
 
 export const selectFeaturedCampsite = (state) => {
-    return state.campsites.campsitesArray.find((campsite) => campsite.featured);
+    return {
+        featuredItem: state.campsites.campsitesArray.find(
+            (campsite) => campsite.featured
+        ),
+        isLoading: state.campsites.isLoading,
+        errMsg: state.campsites.errMsg
+    };
 };
+
